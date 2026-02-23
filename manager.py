@@ -125,8 +125,6 @@ def display_all_products(products): # hàm hiển thị tất cả sản phẩm
     print(f"{'ID':<6} | {'Tên sản phẩm':<20} | {'Thương hiệu':<12} | {'Giá':>10} | {'SL':>4}")
     print("-" * 70)
     for p in products:
-        print(f"{p['id']} | {p['name']} | {p['brand']} | {p['price']} | SL: {p['quantity']}")
-    print("-" * 60)
         print(f"{p['id']:<6} | {p['name']:<20} | {p['brand']:<12} | {p['price']:>10,} | {p['quantity']:>4}")
     print("-" * 70)
 
