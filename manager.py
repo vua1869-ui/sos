@@ -77,7 +77,6 @@ def update_product(products):# hàm sửa sản phẩm
             quantity = input(f"Số lượng ({p['quantity']}): ")
 
             if price:
-                p["price"] = int(price)
                 try:
                     p["price"] = int(price)
                 except ValueError: print("❌ Giá không hợp lệ, giữ nguyên.")
