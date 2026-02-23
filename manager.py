@@ -42,8 +42,6 @@ def add_product(products): # hàm thêm sản phẩm
     print("\n➕ THÊM SẢN PHẨM")
     name = input("Tên sản phẩm: ")
     brand = input("Thương hiệu: ")
-    price = int(input("Giá: "))
-    quantity = int(input("Số lượng: "))
     
     while True:
         try:
