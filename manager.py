@@ -121,7 +121,6 @@ def display_all_products(products): # hàm hiển thị tất cả sản phẩm
         print("Kho hàng trống.")
         return
 
-    print("-" * 60)
     print("-" * 70)
     print(f"{'ID':<6} | {'Tên sản phẩm':<20} | {'Thương hiệu':<12} | {'Giá':>10} | {'SL':>4}")
     print("-" * 70)
