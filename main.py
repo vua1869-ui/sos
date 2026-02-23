@@ -29,10 +29,13 @@ def main():
             display_all_products(products)
         elif choice == "2":
             products = add_product(products)
+            save_data(products)
         elif choice == "3":
             products = update_product(products)
+            save_data(products)
         elif choice == "4":
             products = delete_product(products)
+            save_data(products)
         elif choice == "5":
             search_product_by_name(products)
         elif choice == "0":
