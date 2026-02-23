@@ -27,7 +27,16 @@ def save_data(products):#hàm  lưu dữ liệu vào file
 # ------------------ CORE ------------------
 def generate_id(products): # hàm tạo mã sản phẩm tự động
     """Tự động tạo mã sản phẩm"""
-    return f"LT{len(products) + 1:02d}"
+    if not products:
+        return "LT01"
+    max_id = 0
+    for p in products:
+        if p["id"].startswith("LT"):
+            try:
+                pid = int(p["id"][2:])
+                if pid > max_id: max_id = pid
+            except ValueError: continue
+    return f"LT{max_id + 1:02d}"
 
 def add_product(products): # hàm thêm sản phẩm 
     print("\n➕ THÊM SẢN PHẨM")
@@ -35,6 +44,14 @@ def add_product(products): # hàm thêm sản phẩm
     brand = input("Thương hiệu: ")
     price = int(input("Giá: "))
     quantity = int(input("Số lượng: "))
+    
+    while True:
+        try:
+            price = int(input("Giá: "))
+            quantity = int(input("Số lượng: "))
+            break
+        except ValueError:
+            print("❌ Vui lòng nhập số cho Giá và Số lượng!")
 
     product = {
         "id": generate_id(products),
@@ -63,8 +80,14 @@ def update_product(products):# hàm sửa sản phẩm
 
             if price:
                 p["price"] = int(price)
+                try:
+                    p["price"] = int(price)
+                except ValueError: print("❌ Giá không hợp lệ, giữ nguyên.")
             if quantity:
                 p["quantity"] = int(quantity)
+                try:
+                    p["quantity"] = int(quantity)
+                except ValueError: print("❌ Số lượng không hợp lệ, giữ nguyên.")
 
             print("✅ Cập nhật thành công!")
             return products
@@ -96,6 +119,11 @@ def search_product_by_name(products): # # Toi uu ham tim kiem
             found = True
 
     if not found:
+    results = [p for p in products if keyword in p["name"].lower()]
+    
+    if results:
+        display_all_products(results)
+    else:
         print("❌ Không tìm thấy sản phẩm!")
 
 def display_all_products(products): # hàm hiển thị tất cả sản phẩm
@@ -105,6 +133,45 @@ def display_all_products(products): # hàm hiển thị tất cả sản phẩm
         return
 
     print("-" * 60)
+    print("-" * 70)
+    print(f"{'ID':<6} | {'Tên sản phẩm':<20} | {'Thương hiệu':<12} | {'Giá':>10} | {'SL':>4}")
+    print("-" * 70)
     for p in products:
         print(f"{p['id']} | {p['name']} | {p['brand']} | {p['price']} | SL: {p['quantity']}")
     print("-" * 60)
+        print(f"{p['id']:<6} | {p['name']:<20} | {p['brand']:<12} | {p['price']:>10,} | {p['quantity']:>4}")
+    print("-" * 70)
+
+def search_product_by_name(products): # # Toi uu ham tim kiem
+    print("\n🔍 TÌM KIẾM")
+    keyword = input("Nhập từ khóa: ").lower()#(Dùng .lower() để tìm ko phân biệt hoa thường)
+
+    found = False
+    for p in products:
+        if keyword in p["name"].lower():
+            print(p)
+            found = True
+
+    if not found:
+    results = [p for p in products if keyword in p["name"].lower()]
+    
+    if results:
+        display_all_products(results)
+    else:
+        print("❌ Không tìm thấy sản phẩm!")
+
+def display_all_products(products): # hàm hiển thị tất cả sản phẩm
+    print("\n📦 DANH SÁCH SẢN PHẨM")
+    if not products:
+        print("Kho hàng trống.")
+        return
+
+    print("-" * 60)
+    print("-" * 70)
+    print(f"{'ID':<6} | {'Tên sản phẩm':<20} | {'Thương hiệu':<12} | {'Giá':>10} | {'SL':>4}")
+    print("-" * 70)
+    for p in products:
+        print(f"{p['id']} | {p['name']} | {p['brand']} | {p['price']} | SL: {p['quantity']}")
+    print("-" * 60)
+        print(f"{p['id']:<6} | {p['name']:<20} | {p['brand']:<12} | {p['price']:>10,} | {p['quantity']:>4}")
+    print("-" * 70)
