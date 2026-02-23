@@ -108,13 +108,6 @@ def search_product_by_name(products): # # Toi uu ham tim kiem
     print("\n🔍 TÌM KIẾM")
     keyword = input("Nhập từ khóa: ").lower()#(Dùng .lower() để tìm ko phân biệt hoa thường)
 
-    found = False
-    for p in products:
-        if keyword in p["name"].lower():
-            print(p)
-            found = True
-
-    if not found:
     results = [p for p in products if keyword in p["name"].lower()]
     
     if results:
