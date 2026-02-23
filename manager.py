@@ -127,37 +127,3 @@ def display_all_products(products): # hàm hiển thị tất cả sản phẩm
     for p in products:
         print(f"{p['id']:<6} | {p['name']:<20} | {p['brand']:<12} | {p['price']:>10,} | {p['quantity']:>4}")
     print("-" * 70)
-
-def search_product_by_name(products): # # Toi uu ham tim kiem
-    print("\n🔍 TÌM KIẾM")
-    keyword = input("Nhập từ khóa: ").lower()#(Dùng .lower() để tìm ko phân biệt hoa thường)
-
-    found = False
-    for p in products:
-        if keyword in p["name"].lower():
-            print(p)
-            found = True
-
-    if not found:
-    results = [p for p in products if keyword in p["name"].lower()]
-    
-    if results:
-        display_all_products(results)
-    else:
-        print("❌ Không tìm thấy sản phẩm!")
-
-def display_all_products(products): # hàm hiển thị tất cả sản phẩm
-    print("\n📦 DANH SÁCH SẢN PHẨM")
-    if not products:
-        print("Kho hàng trống.")
-        return
-
-    print("-" * 60)
-    print("-" * 70)
-    print(f"{'ID':<6} | {'Tên sản phẩm':<20} | {'Thương hiệu':<12} | {'Giá':>10} | {'SL':>4}")
-    print("-" * 70)
-    for p in products:
-        print(f"{p['id']} | {p['name']} | {p['brand']} | {p['price']} | SL: {p['quantity']}")
-    print("-" * 60)
-        print(f"{p['id']:<6} | {p['name']:<20} | {p['brand']:<12} | {p['price']:>10,} | {p['quantity']:>4}")
-    print("-" * 70)
